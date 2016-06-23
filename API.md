@@ -120,6 +120,9 @@ We have a number of variables which are special, the most important ones are:
     * This holds the name of the currently active display-mode
 * `global.sent-mail`
     * This is the Maildir to which outgoing messages are saved.
+* `global.mime-file`
+    * This is the file from which MIME-type handlers are read.
+    * Default: `/etc/mailcap`
 
 For each mode that has a display there will be a `$mode.max` to store the
 count of the objects, as well as `$mode.current`.
