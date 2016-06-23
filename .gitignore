@@ -4,3 +4,5 @@ lumail2
 lumail2-debug
 docs/
 lumail2.log
+t/test-suite
+*.orig

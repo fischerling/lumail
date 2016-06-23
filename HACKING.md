@@ -78,3 +78,16 @@ class is defined in `config_lua.cc`.
 The wrappers are very simple, and follow a template.
 
 
+Testing
+-------
+
+Regretably much of our code is not tested in a systematic fashion.
+
+However there is some test-code which is built into our main binary,
+to invoke it please run:
+
+    $ lumail2 --test
+
+Testing is accomplished via the CuTest library, as somethign I picked
+on a whim many years ago and stuck with.  The implementation of our
+tests is stored in files with a `_test.cc` suffix.

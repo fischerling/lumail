@@ -28,7 +28,6 @@
 #include <unistd.h>
 
 #include "file.h"
-#include "maildir.h"
 
 
 
@@ -88,7 +87,7 @@ bool CFile::is_maildir(std::string path)
 std::string CFile::basename(std::string path)
 {
     size_t
-    offset = path.find_last_of("/");
+    offset = path.find_last_of("/\\");
 
     if (offset != std::string::npos)
         return (path.substr(offset + 1));

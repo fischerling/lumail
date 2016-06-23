@@ -143,6 +143,13 @@ serve_docs: docs
 
 
 #
+# Run our test-cases, from the main binary.
+#
+test: lumail2
+	./lumail2 --test
+
+
+#
 #  Install the binary, and our luarocks.d directory
 #
 install: lumail2
@@ -165,5 +172,3 @@ install: lumail2
 
     # if there is no config in-place, add the default
 	if [ ! -e /etc/lumail2/lumail2.lua ] ; then cp ./lumail2.lua /etc/lumail2/lumail2.lua ; fi
-
-
