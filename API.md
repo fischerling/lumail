@@ -101,6 +101,9 @@ We have a number of variables which are special, the most important ones are:
     * This is a speed optimization for large Maildirs, or when using IMAP.
 * `index.sort`
     * The method to sort messages by: `date`, `from`, `none`, or `subject` at this time.
+* `global.mailer`
+    * The command used to send mails.
+    * Default: `/usr/lib/sendmail -t`
 * `global.editor`
     * The user's editor.
 * `global.from`
