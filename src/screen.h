@@ -177,6 +177,7 @@ public:
      */
     void sleep(int seconds);
 
+    void popup(int height, int width, std::vector<std::string> content);
     /**
      * Choose a single item from a small selection.
      *

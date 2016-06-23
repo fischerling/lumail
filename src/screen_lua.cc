@@ -31,6 +31,7 @@ extern "C"
 #include "maildir_lua.h"
 #include "message_lua.h"
 #include "screen.h"
+#include "lua.h"
 
 
 
@@ -120,6 +121,20 @@ int l_CScreen_get_line(lua_State * l)
     return 1;
 }
 
+int l_CScreen_popup(lua_State * l) 
+{
+    const int height = luaL_checkinteger(l, 2); 
+    const int width = luaL_checkinteger(l, 3); 
+    const char *function = luaL_checkstring(l, 4);
+
+    CLua *lua = CLua::instance();
+    const std::vector<std::string> content = lua->function2table(function);
+
+    CScreen *foo = CScreen::instance();
+    foo->popup(height, width, content);
+
+    return 1;
+}
 
 /**
  * Implementation of Screen:prompt_chars().
@@ -200,6 +215,7 @@ void InitScreen(lua_State * l)
         {"sleep", l_CScreen_sleep},
         {"stuff", l_CScreen_stuff},
         {"width", l_CScreen_width},
+        {"popup", l_CScreen_popup},
         {NULL, NULL}
     };
     luaL_newmetatable(l, "luaL_CScreen");

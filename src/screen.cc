@@ -422,7 +422,49 @@ int CScreen::width()
     return (w.ws_col);
 }
 
+void CScreen::popup(int height, int width, std::vector<std::string> content)
+{
+    int x, y;
 
+    x = 0;
+    y = CScreen::height() - height;
+    WINDOW *popup = newwin(height, width, x, y);
+    box(popup, 0, 0);
+
+    while (true)
+    {
+        refresh();
+
+        int i = 0;
+        for(std::string c : content) {
+            mvwaddstr(popup, 2 + i++, 2 , c.c_str());
+        }
+
+        wrefresh(popup);
+        
+
+        /*
+         * Read input from the queue / keyboard.
+         */
+        CInputQueue *input = CInputQueue::instance();
+        int c = input->get_input();
+
+        if (c == '\n')
+            break;
+
+    }
+
+    delwin(popup);
+    ::clear();
+    /*
+     * Get our timeout period, and set it.
+     */
+    CConfig *config = CConfig::instance();
+    int tout = config->get_integer("global.timeout", 750);
+
+    timeout(tout);
+    
+}
 
 /*
  *  Create the status-panel.

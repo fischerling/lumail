@@ -1871,6 +1871,7 @@ function Message:format()
    local flags   = self:flags()
    local subject = self:header( "Subject" )
    local sender  = self:header( "From" )
+   local date    = self:header( "Date" ):match(".*, (.*) [0-9]+:.*")
 
    --
    -- Count the attachments - and add an "A" if there are any
@@ -1884,8 +1885,8 @@ function Message:format()
    --
    -- Format this message for display
    --
-   local output = string.format( "[%4s] %s - %s - %s",
-                                 flags, a_flags, sender, subject )
+   local output = string.format( "[%4s] %s | %s | %s | %s",
+                                 flags, a_flags, date, sender, subject )
 
    --
    -- If the message is unread then show it in the "unread" colour
