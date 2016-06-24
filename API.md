@@ -108,6 +108,8 @@ We have a number of variables which are special, the most important ones are:
     * The user's editor.
 * `global.from`
     * The email address to send messages from.
+* `global.sender`
+    * The entry of the "From" header field
 * `global.timeout`
     * The timeout period (milliseconds) in our event-loop.
 * `global.tmpdir`
