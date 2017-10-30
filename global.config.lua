@@ -3972,14 +3972,30 @@ function complete_lua(buffer)
   --
   -- Add path and email completions
   --
-  local _, paths = complete_path(token)
-  for _, p in ipairs(paths) do
-    table.insert(ret, p)
-  end
-
   local _, addresses = complete_address(token)
   for _, a in ipairs(addresses) do
     table.insert(ret, a)
+  end
+
+  -- find the last open string in buffer
+  local last_open_string = buffer:match("^[^\"]*\"[^\"]*\"[^\"]*\"()[^\"]*$") -- uneven amount of "
+                           or buffer:match("^[^\"]*\"()[^\"]*$")              -- only one "
+
+  if last_open_string and last_open_string ~= #buffer - #token + 1 then -- no new token needed
+    -- prefix to match up with the new path_token
+    local completion_prefix = buffer:sub(last_open_string, -1 - #token)
+
+    -- add prefix to other completions
+    for i, c in ipairs(ret) do
+      ret[i] = completion_prefix .. c
+    end
+
+    token = buffer:sub(last_open_string, -1)
+  end
+
+  local _, paths = complete_path(token)
+  for _, p in ipairs(paths) do
+    table.insert(ret, p)
   end
 
   return token, ret
